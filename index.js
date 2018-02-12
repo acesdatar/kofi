@@ -15,9 +15,11 @@ socket.on('guess',function(data){
 
     let myGuess = (Math.floor(Math.random() * 10 ) + 1);
     while(data !== myGuess){
+        pause(5000);
         myGuess = (Math.floor(Math.random() * 10 ) + 1);
         console.log("Wrong Guess");
     }
+    pause(5000);
     console.log("Correct");
     socket.emit('guess',(Math.floor(Math.random() * 10 ) + 1));
 });
@@ -25,3 +27,8 @@ socket.on('guess',function(data){
 socket.on('disconnect', function(){
     console.log("Bye Bye");
 });
+
+function pause(milliseconds) {
+	var dt = new Date();
+	while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
+}

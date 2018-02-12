@@ -21,7 +21,11 @@ io.on('connection', function(client){
             let randomUser = Math.floor(Math.random() * MAX_NUMBER_OF_USERS);
             io.to(userIDs[randomUser]).emit('guess',(Math.floor(Math.random() * MAX_GUESS_NUMBER) + 1));
         }
-        
+
+        client.on('guess',function(data){
+            client.broadcast.emit('guess',data);
+        });
+
         client.on('disconnect', function(){
             console.log("Client Disconnected");
         });
